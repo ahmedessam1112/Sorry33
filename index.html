@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صفحة الدخول</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} 
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e1e2f 0%, #3a1c71 50%, #d76d77 100%);
+  color: #333;
+  padding: 20px; /* إضافة مسافة أمان للشاشات الصغيرة */
+} 
+
+.container {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  padding: 35px 25px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 100%;
+  max-width: 500px; /* زيادة عرض الصندوق قليلاً ليناسب النص الطويل */
+  max-height: 85vh; /* تحديد أقصى ارتفاع للصندوق عشان مايخرجش بره الشاشة */
+  overflow-y: auto; /* السماح بالتمرير الرأسي لو الكلام كتير */
+  transition: all 0.3s ease;
+  word-break: break-word; /* منع خروج الكلمات الطويلة عن الحدود */
+} 
+
+/* تخصيص شكل شريط التمرير داخل الصندوق ليكون أنيقاً */
+.container::-webkit-scrollbar {
+  width: 6px;
+}
+.container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+#login-screen p.title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #4a4a4a;
+  margin-bottom: 20px;
+} 
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 10px;
+} 
+
+input[type="text"] {
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.3s ease;
+  width: 100%;
+} 
+
+input[type="text"]:focus {
+  border-color: #6c5ce7;
+} 
+
+.hint-msg {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 15px;
+} 
+
+button {
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+} 
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(108, 92, 231, 0.4);
+} 
+
+button:active {
+  transform: translateY(0);
+} 
+
+#error-msg {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  font-weight: 500;
+} 
+
+#secret-content {
+  display: none;
+  line-height: 1.8;
+  color: #2d3436;
+  font-size: 1.05rem;
+  text-align: right;
+} 
+
+#secret-content p {
+  margin-bottom: 12px;
+} 
+
+.thoughts {
+  background: #f1f2f6;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #636e72;
+  margin-top: 10px;
+  margin-bottom: 20px;
+} 
+
+.apology {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #d63031;
+  text-align: center;
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+} 
+
+.normal-text {
+  font-size: 1rem;
+  font-weight: normal;
+  color: #2d3436;
+  text-align: right;
+  margin-top: 10px;
+  white-space: pre-line; /* يحافظ على المسافات والسطور الجديدة كما كتبتها */
+}
+</style>
+</head>
+<body> 
+
+<div class="container">
+  <div id="login-screen">
+    <p class="title">انتي عارفه كلمه السر</p>
+    <div class="input-group">
+      <input type="text" id="password" placeholder="DD/MM/YYYY">
+      <p class="hint-msg">ملحوظه: انتي عارفاها كده كده</p>
+      <button onclick="checkPassword()">دخول</button>
+    </div>
+    <p id="error-msg" style="display: none;">كلمة المرور غير صحيحة</p>
+  </div> 
+
+  <div id="secret-content">
+    <p>بما ان الموقع فتح ف انتي اكيد نن عيني </p>
+    <p>طيب انا عارف انك في حاجات كتير اوي ف بالك منها:</p>
+    <div class="thoughts">
+      (هو طلع كداب - عمره م حبني - عايز يبعد وخلاص)
+    </div>
+    <p class="apology">أولاً أنا آسف</p>
+    <p class="normal-text">بس عايزك تفهمي كام حاجه وتصدقيني فيهم حتى لو م هتصدقيني ف اي حاجه قولتها طول عمري
+بصي اولا انا فاهم قد اي انتي كنتي مضايقه واسف ي حياتي عشان اللي حصل ده
+اسف عشان كدبت عليكي
+واسف عشان خليتك تفكري ف حاجات غلط وانا غلطت اوي اوي المره دي وانا اسف ي نور عيني ونا غلطت لما خدت قرار غبي زي ده
+    </p>
+    <p class="apology">ثانياً</p>
+    <p class="normal-text">انا ونا بقولك اننا نبعد ف انا بقولك كده عشانا احنا الاتنين 
+ليه؟
+اولا عشان انا خايف عليكي وقلقي زاد اوي الفتره دي بسبب ان حصل موقف 
+كنت ف الجيم وماسك التاب وعبده كان موجود ف انا ببص ف المرايه ب الصدفه لقيته باصص عليا بنظره كأنها شك الكلام ده م حوالي فتره ف انا خوفت ل يحصل زي المره اللي اتكشفنا فيها بسبب ان عبده شك 
+دي حاجه
+الحاجه التانيه هي اننا بنخسر توفيق ربنا لاننا عارفين ان ده حرام واحنا مكملين ف كأننا بنتحدى ربنا استغفر الله العظيم 
+ف انا كنت ف حيره وصراع خصوصا الايام اللي فاتت بين الحاجه اللي لازم اعملها والحاجه اللي هموت واعملها وبموت فيها
+وكنت متردد اوي 
+ف ونا كنت بدعي وجيت م الصلاه لقيت الرساله جتلي حسيت انها الاشاره (مش اني بقلب الترابيزه) 
+حسيت ان ربنا بيقولي انا بحطك ف الاختبار دلوقتي بين انك تطيعني وبين انك تختار الدنيا وتختار المستقبل اللي انت م عايز تكون فيه 
+المستقبل ده شوفته ب عيني شوفته ف ابويا وامي وامي بتبصلي ب حسره انها م عارفه تعمل اي ونا شايف ابويا م ف ايده شئ ف انا ساعتها قررت اني م عايز اكون كده م عايز ابق الشخص العادي انا عايز ابق الشخص اللي قادر يكفيكي وزياده ف انا لما بصيت كده قولت انا م عايز اخسر توفيق ربنا دي حاجه تانيه 
+الحاجه التالته بق هي اني عايز اكون معاكي بعد كده ف الحلال م عايز ابق زي باقي الشباب انا عايز ونا بكلمك متكونيش قلقانه م حاجه انا عايز تكوني مطمنه ي نور عيني 🫂
+م عايز يحصلك حاجه تاني بسببي 
+ف قررت اني هسيبك لله....
+بحبك ي نن عيني♥️🫂
+
+ومتنسيش تفتحي اللينك التاني☺️♥️
+    </p>
+  </div>
+</div> 
+
+<script>
+function checkPassword() {
+  const password = document.getElementById("password").value.trim();
+  const correctPassword = "20/10/2024";
+  const loginScreen = document.getElementById("login-screen");
+  const secretContent = document.getElementById("secret-content");
+  const errorMsg = document.getElementById("error-msg"); 
+
+  if (password === correctPassword) {
+    loginScreen.style.display = "none";
+    secretContent.style.display = "block";
+  } else {
+    errorMsg.style.display = "block";
+  }
+}
+</script> 
+
+</body>
+</html>
